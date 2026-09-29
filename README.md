@@ -110,7 +110,7 @@ python -m http.server 5173
 
 ### Terminal 1: Django Admin page
 
--> python manage.py createsuperuser # to access admin pannel
+-> python manage.py createsuperuser          # to access admin pannel
 
 -> You will be prompted to enter:
 Username: (e.g., admin)
@@ -118,7 +118,7 @@ Email address: (e.g., admin@example.com or press Enter to skip)
 Password: (type a secure password; the characters will not show while typing)
 Password (again): (re-enter the password)
 
--> re-start the server: python manage.py runserver 127.0.0.1:8000
+-> re-start the server:    python manage.py runserver 127.0.0.1:8000
 
 
 ## Key URLs
