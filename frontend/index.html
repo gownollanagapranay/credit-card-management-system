@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Credit Card Payment Portal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <h1>Credit Card Payment System</h1>
+                <div id="authStatusBox">
+                    <span id="userGreeting">Not Logged In</span>
+                    <button id="logoutBtn" class="btn-sm btn-danger" style="display:none;">Logout</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- MODULE 1: AUTHENTICATION -->
+        <div id="authSection" class="grid">
+            <div class="card">
+                <h2>User Registration</h2>
+                <form id="regForm">
+                    <div class="form-group">
+                        <label>Username</label>
+                        <input type="text" id="regUser" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="regEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" id="regPass" required>
+                    </div>
+                    <button type="submit" class="btn">Register</button>
+                </form>
+                <div id="regOutput" class="output"></div>
+            </div>
+
+            <div class="card">
+                <h2>User Login (JWT Auth)</h2>
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label>Username</label>
+                        <input type="text" id="loginUser" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" id="loginPass" required>
+                    </div>
+                    <button type="submit" class="btn">Login</button>
+                </form>
+                <div id="loginOutput" class="output"></div>
+            </div>
+        </div>
+
+        <!-- MAIN APP (ACTIVE WHEN LOGGED IN) -->
+        <div id="appSection" style="display:none;">
+            <div class="grid">
+                <!-- MODULE 2: CARD MANAGEMENT -->
+                <div class="card">
+                    <h2>Add Credit/Debit Card</h2>
+                    <form id="addCardForm">
+                        <div class="form-group">
+                            <label>Cardholder Name</label>
+                            <input type="text" id="cName" required>
+                        </div>
+                        <div class="form-group">
+                            <label>16-Digit Card Number (Never Stored Plaintext)</label>
+                            <input type="text" id="cNumber" maxlength="16" placeholder="4111222233334444" required>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col">
+                                <label>Exp Month</label>
+                                <input type="number" id="cExpM" min="1" max="12" value="12" required>
+                            </div>
+                            <div class="form-group col">
+                                <label>Exp Year</label>
+                                <input type="number" id="cExpY" min="2024" max="2035" value="2028" required>
+                            </div>
+                            <div class="form-group col">
+                                <label>CVV</label>
+                                <input type="password" id="cCVV" maxlength="4" placeholder="123" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Credit Limit ($)</label>
+                            <input type="number" id="cLimit" value="5000" required>
+                        </div>
+                        <button type="submit" class="btn">Save Card</button>
+                    </form>
+                    <div id="addCardOutput" class="output"></div>
+                </div>
+
+                <!-- MODULE 3: PAYMENT PROCESSING -->
+                <div class="card">
+                    <h2>Make a Payment (FastAPI Gateway)</h2>
+                    <form id="paymentForm">
+                        <div class="form-group">
+                            <label>Cardholder Name</label>
+                            <input type="text" id="pName" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Card Number</label>
+                            <input type="text" id="pNumber" maxlength="16" required>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col">
+                                <label>Exp Month</label>
+                                <input type="number" id="pExpM" min="1" max="12" required>
+                            </div>
+                            <div class="form-group col">
+                                <label>Exp Year</label>
+                                <input type="number" id="pExpY" min="2024" max="2035" required>
+                            </div>
+                            <div class="form-group col">
+                                <label>CVV</label>
+                                <input type="password" id="pCVV" maxlength="4" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Merchant Name</label>
+                            <input type="text" id="pMerchant" value="Online Tech Store" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Amount ($)</label>
+                            <input type="number" step="0.01" id="pAmount" value="79.99" required>
+                        </div>
+                        <button type="submit" class="btn btn-success">Process Payment</button>
+                    </form>
+                    <div id="paymentOutput" class="output"></div>
+                </div>
+            </div>
+
+            <!-- MODULE 2: VIEW SAVED CARDS -->
+            <div class="card full-width">
+                <div class="section-header">
+                    <h2>Saved Cards (Masked Only)</h2>
+                    <button id="refreshCardsBtn" class="btn-sm">Refresh Cards</button>
+                </div>
+                <div id="cardsList" class="table-container"></div>
+            </div>
+
+            <!-- MODULE 4: TRANSACTION HISTORY -->
+            <div class="card full-width">
+                <div class="section-header">
+                    <h2>Transaction History</h2>
+                    <button id="refreshTxnBtn" class="btn-sm">Refresh Transactions</button>
+                </div>
+                <div id="txnList" class="table-container"></div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

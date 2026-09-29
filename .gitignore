@@ -1,0 +1,30 @@
+# Environment Variables & Secrets
+.env
+*.env
+
+# Virtual Environments
+venv/
+.venv/
+env/
+ENV/
+
+# Python Cache & Bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+
+# Frontend & Build Artifacts
+node_modules/
+dist/
+build/
+
+# Static & Database Files
+*.sqlite3
+staticfiles/
+
+# IDE & OS Files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
